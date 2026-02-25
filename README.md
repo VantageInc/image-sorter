@@ -1,6 +1,6 @@
 # 🖼️ Image Sorter
 
-![Image Sorter Preview](preview.png)
+![Image Sorter Preview](preview-safe.png)
 
 A lightning-fast, brutally minimalist desktop application for managing and sorting large directories of images. Built with Electron, React, and Vite.
 
