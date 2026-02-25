@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# 🖼️ Image Sorter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightning-fast, brutally minimalist desktop application for managing and sorting large directories of images. Built with Electron, React, and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **🚀 Native Performance**: Generates OS-level image thumbnails (`nativeImage.createThumbnailFromPath`) asynchronously. Hundreds of images load instantly without memory leaks or UI freezes via `IntersectionObserver` lazy-loading.
+- **🖤 Brutalist Aesthetic**: A high-contrast, sharp-cornered UI inspired by modern brutalism. Every interaction is tactile and immediate. Custom frameless window controls.
+- **📂 Deep Filtering**: 
+  - Dynamic extensions filter (`.png`, `.jpg`, `.psd`, `.webp`, etc.)
+  - Range-based size buckets (`< 1MB`, `1-5MB`, `> 10MB`)
+  - Auto-extracted semantic Tags based on filenames.
+- **📐 Resolution Grouping**: Images are automatically categorized and grouped by their exact pixel dimensions (e.g., `1920x1080`). Easily bulk-select entire resolution buckets.
+- **🔎 Metadata Inspector**: Select any image to instantly view its embedded EXIF, IPTC, and XMP data via a fast binary chunk-reader (`exifr`).
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### For Windows Users (Portable)
+1. Go to the [Releases](../../releases) page (if published).
+2. Download `Image Sorter <version>.exe`.
+3. Run the executable. No installation required.
 
-## Expanding the ESLint configuration
+### Building from Source
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Requirements:**
+- Node.js (v18+)
+- npm or yarn
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/image-sorter.git
+cd image-sorter
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run in development mode
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Packaging for Production
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To create a portable executable for Windows:
+```bash
+npm run build
 ```
+*(The output will be in the `release/` folder).*
+
+To create a build for macOS (Must be run on a macOS machine):
+```bash
+npm run build:mac
+```
+
+## Tech Stack
+- **Framework**: Electron + Vite
+- **Frontend**: React + Tailwind CSS
+- **Icons**: Lucide React
+- **Metadata Handling**: `exifr` and `image-size`
+- **Builder**: `electron-builder`
