@@ -1,24 +1,28 @@
-# 🖼️ Image Sorter
+# Image Sorter
 
-![Image Sorter Preview](preview-safe.png)
+![Image Sorter Preview](app-preview.png)
 
-A lightning-fast, brutally minimalist desktop application for managing and sorting large directories of images. Built with Electron, React, and Vite.
+A desktop application for managing and sorting large directories of images.
+
+## How it works
+
+1. **Select Folder**: Open the application and choose a folder on your computer to scan.
+2. **Filter Images**: Use the filters to find exactly what you need based on:
+   - File extensions (`.jpg`, `.png`, `.webp`, etc.)
+   - File size (`< 1MB`, `1-5MB`, etc.)
+   - Auto-extracted tags from filenames
+   - Exact pixel dimensions (e.g., `1920x1080` or `3840x2160`)
+3. **Copy Selected**: Select individual images or entire resolution groups, then click "Copy Selected" to copy them to a new destination folder.
 
 ## Features
 
-- **🚀 Native Performance**: Generates OS-level image thumbnails (`nativeImage.createThumbnailFromPath`) asynchronously. Hundreds of images load instantly without memory leaks or UI freezes via `IntersectionObserver` lazy-loading.
-- **🖤 Brutalist Aesthetic**: A high-contrast, sharp-cornered UI inspired by modern brutalism. Every interaction is tactile and immediate. Custom frameless window controls.
-- **📂 Deep Filtering**: 
-  - Dynamic extensions filter (`.png`, `.jpg`, `.psd`, `.webp`, etc.)
-  - Range-based size buckets (`< 1MB`, `1-5MB`, `> 10MB`)
-  - Auto-extracted semantic Tags based on filenames.
-- **📐 Resolution Grouping**: Images are automatically categorized and grouped by their exact pixel dimensions (e.g., `1920x1080`). Easily bulk-select entire resolution buckets.
-- **🔎 Metadata Inspector**: Select any image to instantly view its embedded EXIF, IPTC, and XMP data via a fast binary chunk-reader (`exifr`).
+- **Metadata Inspector**: Select any single image to view its embedded EXIF, IPTC, and XMP data in the right panel.
+- **Directory Tree**: Easily navigate through subfolders within your selected directory.
 
 ## Installation
 
-### For Windows Users (Portable)
-1. Go to the [Releases](../../releases) page (if published).
+### For Windows Users
+1. Go to the [Releases](../../releases) page.
 2. Download `Image Sorter <version>.exe`.
 3. Run the executable. No installation required.
 
@@ -26,36 +30,22 @@ A lightning-fast, brutally minimalist desktop application for managing and sorti
 
 **Requirements:**
 - Node.js (v18+)
-- npm or yarn
+- npm
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/image-sorter.git
+git clone https://github.com/VantageInc/image-sorter.git
 cd image-sorter
 
 # Install dependencies
 npm install
 
-# Run in development mode
+# Run locally
 npm run dev
-```
 
-### Packaging for Production
-
-To create a portable executable for Windows:
-```bash
+# Build Windows executable
 npm run build
-```
-*(The output will be in the `release/` folder).*
 
-To create a build for macOS (Must be run on a macOS machine):
-```bash
+# Build macOS app (must be run on macOS)
 npm run build:mac
 ```
-
-## Tech Stack
-- **Framework**: Electron + Vite
-- **Frontend**: React + Tailwind CSS
-- **Icons**: Lucide React
-- **Metadata Handling**: `exifr` and `image-size`
-- **Builder**: `electron-builder`
