@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+    color: #131313;
+  }
+}
+
+@layer utilities {
+  .pixel-shadow {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pixel-shadow::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: -8px;
+    bottom: -8px;
+    z-index: -1;
+    background-image: radial-gradient(#131313 1.5px, transparent 1.5px);
+    background-size: 6px 6px;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+
+  .pixel-shadow:hover::before {
+    top: 12px;
+    left: 12px;
+    right: -12px;
+    bottom: -12px;
+  }
+}
