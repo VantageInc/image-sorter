@@ -8,7 +8,10 @@ import type { VerifiedCopyFileInput } from './copy-files';
 const temporaryDirectories: string[] = [];
 
 async function createTemporaryDirectory(): Promise<string> {
-  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'image-sorter-copy-'));
+  const createdDirectory = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'image-sorter-copy-'),
+  );
+  const directory = await fs.realpath(createdDirectory);
   temporaryDirectories.push(directory);
   return directory;
 }

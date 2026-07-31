@@ -17,7 +17,10 @@ const PNG_1X1 = Buffer.from(
 const temporaryDirectories: string[] = [];
 
 async function createTemporaryDirectory(): Promise<string> {
-  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'image-sorter-catalog-'));
+  const createdDirectory = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'image-sorter-catalog-'),
+  );
+  const directory = await fs.realpath(createdDirectory);
   temporaryDirectories.push(directory);
   return directory;
 }
