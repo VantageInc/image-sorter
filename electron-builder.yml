@@ -1,0 +1,73 @@
+appId: io.github.vantageinc.imagesorter
+productName: Image Sorter
+copyright: Copyright © 2026 VantageInc
+asar: true
+compression: maximum
+npmRebuild: false
+nodeGypRebuild: false
+removePackageScripts: true
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - package.json
+  - "!dist/demo/**/*"
+  - "!node_modules/**/*"
+
+extraResources:
+  - from: LICENSE
+    to: LICENSE.txt
+  - from: THIRD_PARTY_NOTICES.md
+    to: THIRD_PARTY_NOTICES.md
+  - from: licenses
+    to: licenses
+
+electronFuses:
+  runAsNode: false
+  enableCookieEncryption: true
+  enableNodeOptionsEnvironmentVariable: false
+  enableNodeCliInspectArguments: false
+  enableEmbeddedAsarIntegrityValidation: true
+  onlyLoadAppFromAsar: true
+  loadBrowserProcessSpecificV8Snapshot: false
+
+win:
+  icon: build/icon.png
+  target:
+    - nsis
+    - portable
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  artifactName: Image-Sorter-${version}-Windows-${arch}-Setup.${ext}
+
+portable:
+  artifactName: Image-Sorter-${version}-Windows-${arch}-Portable.${ext}
+
+mac:
+  icon: build/icon.png
+  category: public.app-category.photography
+  minimumSystemVersion: "12.0"
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  target:
+    - dmg
+    - zip
+  artifactName: Image-Sorter-${version}-macOS-${arch}.${ext}
+
+dmg:
+  artifactName: Image-Sorter-${version}-macOS-${arch}.${ext}
+
+publish:
+  provider: github
+  owner: VantageInc
+  repo: image-sorter
